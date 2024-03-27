@@ -1,43 +1,36 @@
-import numpy as np
+import numpy as np 
 import matplotlib.pyplot as plt
 
+# Global constants 
+g = 9.81  # gravitational constant 
+v_o = 100 
+# theta = np.deg2rad(30)
 
-#global constants 
-
-g = 9.81 #gravitational constant 
-x_i = 0 
-y_i = 0 
-v_o = 100
-theta = np.deg2rad(30)
-
-
-def motion_x (t:float) -> float: 
+def main(angle): 
     
-    x_f = x_i + ((v_o * np.cos(theta)) *t)
-    
-    return x_f
+    theta = np.deg2rad(angle)
+    x, y = [], []
+    x_i, y_i = 0, 0 
 
-def motion_y (t:float) -> float: 
-    
-    y_f = y_i + ((v_o * np.sin(theta)) *t) - (g*t**2)/2
-    
-    return y_f
+    for t in np.arange(0, 10, 0.01): 
+        x_f = x_i + (v_o * np.cos(theta) * t)
+        y_f = y_i + (v_o * np.sin(theta) * t) - (g * t**2)
 
+        x.append(x_f)
+        y.append(y_f)
 
+        x_i, y_i = x_f, y_f
 
-def main(): 
+    plt.plot(x, y, label=f"{angle}\u00b0")  # Adding label for each trajectory
 
-    x, y = [],[]
-
-    for i in range(0,101): 
-        x.append(motion_x(i))
-        y.append(motion_y(i))
-
-    for x_coord, y_coord in zip(x, y):
-        print(f"x: {x_coord}, y: {y_coord}")
-    
-    plt.plot(x,y)
-    plt.show()
 
 if __name__ == "__main__":
-    main()
+
+    for angles in range(0,91,15): 
+        main(angles)
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.title("Projectile Motion")
+    plt.legend()
+    plt.savefig("Projectile Motion plots at varying angles.png")
+    plt.show()
