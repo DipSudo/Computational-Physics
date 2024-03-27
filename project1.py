@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 # Global constants 
 g = 9.81  # gravitational constant 
 v_o = 100 
-# theta = np.deg2rad(30)
 
 def main(angle): 
     
