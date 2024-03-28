@@ -32,5 +32,8 @@ def Random_Walk(N,K) -> float:  #function that calculates the random direction t
 if __name__ == "__main__":
     K = 1000  # Number of random walks
     N = 1000  # Maximum number of steps in a single walk
-    average_distance = Random_Walk(K, N) / K
-    print(f"Average distance from the origin after {N} steps in {K} random walks: {average_distance}")
+    R= Random_Walk(K, N) / K
+    
+    a = np.log(R)/np.log(N)
+    print(f"Average distance from the origin after {N} steps in {K} random walks: {R}")
+    print(f"Exponent A is ~{a}")
